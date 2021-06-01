@@ -11,11 +11,24 @@ export const App = () => {
     "完了です1",
     "完了です2"
   ]);
+
+  const [inputTodo, setInputTodo] = useState("");
+  const onChangeInputTodo = (event) => setInputTodo(event.target.value);
+  const onClickInputTodo = () => {
+    if (inputTodo === "") return;
+    const newTodos = [...inCompleteTodos, inputTodo];
+    setIncompleteTodos(newTodos);
+    setInputTodo("");
+  };
   return (
     <>
       <div className="input-area">
-        <input placeholder="TODOを入力" />
-        <button>追加</button>
+        <input
+          placeholder="TODOを入力"
+          value={inputTodo}
+          onChange={onChangeInputTodo}
+        />
+        <button onClick={onClickInputTodo}>追加</button>
       </div>
       <div className="incomplete-area">
         <p className="title">未完了のTODO</p>
